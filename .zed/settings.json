@@ -1,0 +1,24 @@
+{
+  "languages": {
+    "Typst": {
+      "tab_size": 2,
+      "hard_tabs": false,
+      "soft_wrap": "editor_width",
+      "enable_language_server": true
+    }
+  },
+
+  "lsp": {
+    "tinymist": {
+      "settings": {
+        "fontPaths": ["src/assets/fonts"],
+        "outputPath": "$root/build/$name",
+        "exportPdf": "onSave",
+        "formatterMode": "typstyle"
+      }
+    }
+  },
+
+  "file_scan_exclusions": ["build/"]
+
+}
