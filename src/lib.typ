@@ -135,11 +135,11 @@
   grid(
     columns: (1fr, auto, 1fr),
     align: (left + horizon, center + horizon, right + horizon),
-    if show-logo { link("https://beimgraben.net", logo(color: p.logo, height: 0.32cm)) },
     {
       short-title
       if author != none [ #h(0.5em)·#h(0.5em) #author]
     },
+    if show-logo { link("https://beimgraben.net", logo(color: p.logo, height: 0.32cm)) },
     {
       text(fill: p.text, _two(page-number))
       " / "
@@ -156,8 +156,8 @@
 // ---------------------------------------------------------------------------
 // Special slides
 
-// A slide in a strong color for one statement or a question, framed by the
-// pixels of the logo. `fill` sets another color.
+// A slide in a strong color for one statement or a question. `fill` sets
+// another color.
 #let focus-slide(fill: auto, body) = {
   pagebreak(weak: true)
   context {
@@ -173,7 +173,7 @@
         weight: "extrabold",
         fill: p.focus-text,
         hyphenate: false,
-        pixel-frame(gap: 0.4em, size: 0.4em, align(left, body)),
+        body,
       )),
     )
   }
@@ -232,27 +232,21 @@
   background: place(top + left, skyline(paper-width, color: p.skyline, cell: 0.35cm)),
   {
     v(1fr)
-    pixel-frame(
-      size: 0.55cm,
-      gap: 0.45cm,
-      colors: p.marks,
-      {
-        block(below: 0pt, text(
-          size: sizes.title,
-          weight: "extrabold",
-          fill: p.heading,
-          hyphenate: false,
-          title,
-        ))
-        if subtitle != none {
-          block(above: 0.8em, below: 0pt, text(
-            size: sizes.large,
-            fill: p.accent,
-            subtitle,
-          ))
-        }
-      },
-    )
+    block(below: 0pt, text(
+      size: sizes.title,
+      weight: "extrabold",
+      fill: p.heading,
+      hyphenate: false,
+      title,
+    ))
+    _underline(p, length: 3.5em)
+    if subtitle != none {
+      block(above: 0.8em, below: 0pt, text(
+        size: sizes.large,
+        fill: p.accent,
+        subtitle,
+      ))
+    }
     v(1fr)
     set text(size: sizes.small)
     let cells = ()
@@ -268,11 +262,6 @@
       ..cells,
     )
     v(0.2cm)
-    place(
-      bottom + right,
-      dy: margin.bottom - 0.6cm,
-      logo(color: p.logo, height: 0.5cm),
-    )
   },
 )
 
@@ -300,7 +289,7 @@
   // Look
   theme: "blue",
   appearance: "dark",
-  show-logo: true,
+  show-logo: false,
   // Layout
   aspect-ratio: "16-9",
   font-size: sizes.normal,

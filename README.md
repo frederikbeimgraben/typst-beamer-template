@@ -74,8 +74,8 @@ typst init @local/bgslides:1.0.0 my-talk
 | Light and dark appearance (dark is the default) | `appearance` |
 | JetBrains Mono for all text | the only font of the slides |
 | Pixel skyline at the top of the page | top edge of every slide |
-| Logo with the cyan, lime and magenta pixels | footer, title slide |
-| The three pixels around the name on the preview card | title slide, focus slide, list markers |
+| Logo | footer, with `show-logo: true` |
+| The cyan, lime and magenta of the logo pixels | list markers, info boxes, code colors |
 | Line below the logo on hover | line below every title |
 
 The colors are the CSS custom properties of the website, see
@@ -94,7 +94,7 @@ dictionary, and `brand` holds the logo colors.
 | `show-title-slide` | `true` | Print the title slide |
 | `theme` | `"blue"` | Color variant of the website |
 | `appearance` | `"dark"` | `"dark"` or `"light"` |
-| `show-logo` | `true` | Logo in the footer |
+| `show-logo` | `false` | Logo of the website in the middle of the footer |
 | `aspect-ratio` | `"16-9"` | `"16-9"` or `"4-3"` |
 | `font-size`, `lang` | 16pt, de | Text |
 
@@ -113,7 +113,7 @@ dictionary, and `brand` holds the logo colors.
 | `#alert[...]` | Text in the accent color |
 | `#shell[...]` | A line with a `$` prompt |
 | `#logo(color:, height:)` | The logo of the website |
-| `#pixel-frame[...]` | The three logo pixels around content |
+| `#pixel-frame[...]` | The three logo pixels around content, not used by the template itself |
 | `#skyline(width, color:)` | The pixel skyline |
 
 Code blocks get line numbers and a syntax theme in the colors of the
