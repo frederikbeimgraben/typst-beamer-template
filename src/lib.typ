@@ -394,7 +394,7 @@
   set heading(numbering: none)
   show heading: set text(weight: "extrabold", fill: p.heading)
 
-  // A section: a slide of its own with the number, the name and the pixels.
+  // A section: a slide of its own with the number and the name.
   show heading.where(level: 1): set heading(numbering: "1", supplement: [Abschnitt])
   show heading.where(level: 1): it => {
     pagebreak(weak: true)
@@ -403,8 +403,6 @@
       if it.numbering != none {
         let number = counter(heading).get().first()
         block(below: 0.4em, text(size: sizes.large, {
-          pixel(p.marks.at(0), size: 0.5em)
-          h(0.5em)
           text(fill: p.accent, weight: "extrabold", _two(number))
           text(fill: p.text-subtle, weight: "regular", " / " + _two(counter(heading).final().first()))
         }))
