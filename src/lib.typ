@@ -148,9 +148,12 @@
   )
 }
 
-#let _background(p, paper-width, cell) = place(
+// One pixel of the skyline. Every slide uses the same size.
+#let _skyline-cell = 0.16cm
+
+#let _background(p, paper-width, cell, color: auto) = place(
   top + left,
-  skyline(paper-width, color: p.skyline, cell: cell),
+  skyline(paper-width, color: if color == auto { p.skyline } else { color }, cell: cell),
 )
 
 // ---------------------------------------------------------------------------
@@ -166,7 +169,7 @@
     page(
       header: none,
       footer: none,
-      background: none,
+      background: _background(p, page.width, _skyline-cell, color: p.focus-text),
       fill: fill,
       align(center + horizon, text(
         size: sizes.section,
@@ -229,7 +232,7 @@
 #let _title-slide(p, title, subtitle, rows, margin, paper-width) = page(
   header: none,
   footer: none,
-  background: place(top + left, skyline(paper-width, color: p.skyline, cell: 0.35cm)),
+  background: _background(p, paper-width, _skyline-cell),
   {
     v(1fr)
     block(below: 0pt, text(
@@ -321,7 +324,7 @@
     footer-descent: 30%,
     header: _header(p, margin),
     footer: _footer(p, short-title, footer-author, show-logo),
-    background: _background(p, paper-width, 0.16cm),
+    background: _background(p, paper-width, _skyline-cell),
   )
 
   set text(
