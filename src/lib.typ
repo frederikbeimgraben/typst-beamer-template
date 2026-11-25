@@ -434,7 +434,8 @@
     let author-block = {
       let lines = ()
       if author != none {
-        lines.push(if type(author) == array { author.join(", ") } else { author })
+        // Several authors stand one per line on the title slide.
+        if type(author) == array { lines += author } else { lines.push(author) }
       }
       if email != none { lines.push(link("mailto:" + email, email)) }
       lines.join(linebreak())
