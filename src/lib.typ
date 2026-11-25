@@ -149,7 +149,7 @@
 }
 
 // One pixel of the skyline. Every slide uses the same size.
-#let _skyline-cell = 0.16cm
+#let _skyline-cell = 0.22cm
 
 #let _background(p, paper-width, cell, color: auto) = place(
   top + left,

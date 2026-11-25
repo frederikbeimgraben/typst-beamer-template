@@ -9,28 +9,31 @@
   "1101001100011111100010001",
 )
 
-// An SVG of the strip, repeated until it covers `width`.
+// An SVG of the strip, repeated until it covers `width`. Each row becomes
+// runs of filled cells, and all runs form one path. Separate squares would
+// leave hairline gaps between neighbors in most PDF viewers.
 #let _svg(color, repeats) = {
-  let cols = _pattern.first().len()
-  let rects = ()
+  let runs = ()
   for (row, bits) in _pattern.enumerate() {
-    for r in range(repeats) {
-      for (col, bit) in bits.clusters().enumerate() {
-        if bit == "1" {
-          rects.push(
-            "<rect x=\"" + str(r * cols + col) + "\" y=\"" + str(row)
-              + "\" width=\"1.02\" height=\"1.02\"/>",
-          )
-        }
+    let cells = bits.clusters() * repeats
+    let start = none
+    for (col, bit) in (cells + ("0",)).enumerate() {
+      if bit == "1" and start == none { start = col }
+      if bit != "1" and start != none {
+        runs.push(
+          "M" + str(start) + " " + str(row) + "H" + str(col)
+            + "V" + str(row + 1) + "H" + str(start) + "Z",
+        )
+        start = none
       }
     }
   }
-  let hex = color.to-hex()
+  let cols = _pattern.first().len()
   (
     "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 "
       + str(repeats * cols) + " " + str(_pattern.len())
-      + "\" shape-rendering=\"crispEdges\"><g fill=\"" + hex + "\">"
-      + rects.join() + "</g></svg>"
+      + "\"><path fill=\"" + color.to-hex() + "\" d=\""
+      + runs.join() + "\"/></svg>"
   )
 }
 
